@@ -1,0 +1,19 @@
+{
+  "name": "loopbot",
+  "version": "1.0.0",
+  "description": "Galgotias Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrayHat12/LoopBot.git"
+  },
+  "author": "Loop Induction",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GrayHat12/LoopBot/issues"
+  },
+  "homepage": "https://github.com/GrayHat12/LoopBot#readme"
+}
