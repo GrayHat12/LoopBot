@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/GrayHat12/LoopBot/issues"
   },
-  "homepage": "https://github.com/GrayHat12/LoopBot#readme"
+  "homepage": "https://github.com/GrayHat12/LoopBot#readme",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
 }
