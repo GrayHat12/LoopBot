@@ -13,36 +13,8 @@ const loopServer = '624992843064410122';
 const welcomeChannelId = '625018923158601758';
 const PREFIX = '.';
 const client = new Client();
-const tmurl = "https://play.google.com/store/apps/category/GAME/collection/topgrossing";
 
 var welcomeChannel;
-
-function filter(body) {
-    var arr = [];
-    var tmp = '';
-    var start = false;
-    for (var i = 0; i < body.length; i++) {
-        //process.stdout.write("\r"+"I : "+i);
-        if (i + identgs.length < body.length && !start) {
-            if (body.substring(i, i + identgs.length) == identgs) {
-                start = true;
-                continue;
-            }
-        }
-        else if (start) {
-            if (body.charAt(i) == ">") {
-                arr.push(getTitel(tmp));
-                tmp = '';
-                start = false;
-                continue;
-            }
-        }
-        if (start) {
-            tmp += body.charAt(i);
-        }
-    }
-    return arr;
-}
 
 function getTags(mess) {
 	var out = [];
@@ -356,26 +328,6 @@ async function gservers(message) {
     message.channel.send("```ARM\n" + data + "```");
 }
 
-async function gplaygames(message) {
-    var out = '';
-    var tmb = '';
-    request(tmurl, function (err, res, body) {
-        if (err) {
-            console.log(err, "error occured while hitting URL");
-        }
-        else {
-            var arr = filter(body);
-            for (var i = 0; i < arr.length && i < 5; i++) {
-                var img = getImag(arr[i], body);
-                out += arr[i].replace('&amp;', '&') + "\n" + "Image :- " + img + "\n";
-            }
-            tmb = getImag(arr[0], body);
-            var embd = new RichEmbed().setTitle('TOP GAMES FROM PLAYSTORE').setColor(0x636369).setDescription(out).setAuthor(message.author.username, message.author.avatarURL).setThumbnail(tmb);
-            message.reply(embd);
-        }
-    });
-}
-
 async function gprofile(message)
 {
     var tags = getTags(message.content);
@@ -490,11 +442,6 @@ client.on('message', async function (message) {
             else {
                 message.channel.send(`ERROR : ${message.author.username} not authorized for this command.`, { code: "xl" });
             }
-        }
-        //top games list from playstore
-        else if (message.content.toLowerCase() == PREFIX+'topgames') {
-            message.react('👍');
-            await gplaygames(message);
         }
         //user profile
         else if (message.content.toLowerCase().startsWith(PREFIX+'profile')) {
