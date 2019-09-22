@@ -396,7 +396,7 @@ client.on('message', async function (message) {
         });
         //ping
         if (message.content === PREFIX+'ping') {
-            message.reply('pong');
+            message.channel.send('pong');
         }
         //eval
         else if (message.content.startsWith(PREFIX+'eval') && (roles.includes(dev_id))) {
