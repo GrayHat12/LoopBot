@@ -1,0 +1,34 @@
+{
+    "support": {
+        "c": 11,
+        "c++": 44,
+        "c#": 27,
+        "java": 10,
+        "perl": 3,
+        "php": 29,
+        "python": 4,
+        "python3": 116,
+        "scala": 39,
+        "ruby": 17,
+        "nodejs": 56,
+        "go": 114,
+        "bash": 28,
+        "rust": 93
+    },
+    "languages": [
+        "c",
+        "c++",
+        "c#",
+        "java",
+        "perl",
+        "php",
+        "python",
+        "python3",
+        "scala",
+        "ruby",
+        "nodejs",
+        "go",
+        "bash",
+        "rust"
+    ]
+}
