@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/GrayHat12/LoopBot#readme",
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "unirest": "^0.6.0"
   }
 }
