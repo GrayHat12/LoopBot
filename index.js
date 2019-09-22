@@ -4,7 +4,7 @@ const querystring = require('querystring');
 const request = require('request');
 const unirest = require('unirest');
 
-const auth = require('./config.json');
+//const auth = require('./config.json');
 const acronyms = require('./country.json');
 const langCode = require('./language.json');
 
