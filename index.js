@@ -10,7 +10,7 @@ const acronyms = require('./country.json');
 const dev_id = ['425182298280034305', '581373579099242496'];
 const loopServer = '624992843064410122';
 const welcomeChannelId = '625018923158601758';
-const PREFIX = '.cmd-';
+const PREFIX = '.';
 const client = new Client();
 const tmurl = "https://play.google.com/store/apps/category/GAME/collection/topgrossing";
 
@@ -433,7 +433,7 @@ async function gprofile(message)
 }
 
 client.on('message', async function (message) {
-    if (message.author.bot || !message.content.startsWith('cmd')) {
+    if (message.author.bot || !message.content.startsWith(PREFIX)) {
         return;
     }
     try {
@@ -492,7 +492,7 @@ client.on('message', async function (message) {
             await gplaygames(message);
         }
         //user profile
-        else if (message.content.toLowerCase().startsWith(PREFIX+'profile ')) {
+        else if (message.content.toLowerCase().startsWith(PREFIX+'profile')) {
             message.react('👍');
             await gprofile(message);
 		}
