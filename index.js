@@ -433,7 +433,7 @@ async function gprofile(message)
 }
 
 client.on('message', async function (message) {
-    if (message.author.bot || !message.content.startsWith(PREFIX)) {
+    if (message.author.bot || !message.content.startsWith(PREFIX) || !message.guild) {
         return;
     }
     try {
