@@ -7,7 +7,7 @@ const unirest = require('unirest');
 const auth = require('./config.json');
 const acronyms = require('./country.json');
 
-const dev_id = ['425182298280034305', '581373579099242496'];
+const dev_id = '625267795613188130';
 const loopServer = '624992843064410122';
 const welcomeChannelId = '625018923158601758';
 const PREFIX = '.';
@@ -437,17 +437,21 @@ client.on('message', async function (message) {
         return;
     }
     try {
+        const roles=[];
+        message.member.roles.forEach(role=>{
+            roles.push(role.id)
+        });
         //ping
         if (message.content === PREFIX+'ping') {
             message.reply('pong');
         }
         //eval
-        else if (message.content.startsWith(PREFIX+'eval') && dev_id.includes(message.author.id)) {
+        else if (message.content.startsWith(PREFIX+'eval') && roles.includes(dev_id)) {
             message.react('👍');
             await geval(message);
         }
         //system info
-        else if (message.content.toLowerCase().trim() == PREFIX+'sys' && dev_id.includes(message.author.id)) {
+        else if (message.content.toLowerCase().trim() == PREFIX+'sys' && roles.includes(dev_id)) {
             message.react('👍');
             await gsys(message);
         }
@@ -478,7 +482,7 @@ client.on('message', async function (message) {
         }
         //list servers
         else if (message.content == PREFIX+'servers') {
-            if (dev_id.includes(message.author.id)) {
+            if (roles.includes(dev_id)) {
                 message.react('👍');
                 await gservers(message);
             }
