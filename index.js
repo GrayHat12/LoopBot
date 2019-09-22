@@ -8,6 +8,7 @@ const auth = require('./config.json');
 const acronyms = require('./country.json');
 
 const dev_id = '625267795613188130';
+const support_id = '625002905354895380';
 const loopServer = '624992843064410122';
 const welcomeChannelId = '625018923158601758';
 const PREFIX = '.';
@@ -446,12 +447,12 @@ client.on('message', async function (message) {
             message.reply('pong');
         }
         //eval
-        else if (message.content.startsWith(PREFIX+'eval') && roles.includes(dev_id)) {
+        else if (message.content.startsWith(PREFIX+'eval') && (roles.includes(dev_id))) {
             message.react('👍');
             await geval(message);
         }
         //system info
-        else if (message.content.toLowerCase().trim() == PREFIX+'sys' && roles.includes(dev_id)) {
+        else if (message.content.toLowerCase().trim() == PREFIX+'sys' && (roles.includes(dev_id)||roles.includes(support_id))) {
             message.react('👍');
             await gsys(message);
         }
@@ -482,7 +483,7 @@ client.on('message', async function (message) {
         }
         //list servers
         else if (message.content == PREFIX+'servers') {
-            if (roles.includes(dev_id)) {
+            if (roles.includes(dev_id)||roles.includes(support_id)) {
                 message.react('👍');
                 await gservers(message);
             }
