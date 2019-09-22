@@ -355,7 +355,7 @@ async function gprofile(message)
                 .addField('DISCRIMINATOR',memberdata[i].user.discriminator,true)
                 .addField('BOT',memberdata[i].user.bot,true)
                 .addField('LAST MESSAGE',memberdata[i].user.lastMessage.content,true)
-                .addField('ROLES',rols.join(','),true)
+                .addField('ROLES',rols.join(' , '),true)
                 .addField('JOINED AT',memberdata[i].joinedAt,true)
                 .addField('STATUS',memberdata[i].presence.status,true)
                 .addField('ACCOUNT CREATED',clusr[0].createdAt,true)
@@ -372,7 +372,7 @@ async function gprofile(message)
                 .addField('NAME',memberdata[i].user.username,true)
                 .addField('DISCRIMINATOR',memberdata[i].user.discriminator,true)
                 .addField('BOT',memberdata[i].user.bot,true)
-                .addField('ROLES',rols.join(','),true)
+                .addField('ROLES',rols.join(' , '),true)
                 .addField('JOINED AT',memberdata[i].joinedAt,true)
                 .addField('STATUS',memberdata[i].presence.status,true)
                 .addField('ACCOUNT CREATED',clusr[0].createdAt,true)
@@ -383,6 +383,28 @@ async function gprofile(message)
 			}
 		}
 	}
+}
+
+async function ghelp(message)
+{
+    var embed = new RichEmbed()
+    .setTitle('LOOP BOT HELP')
+    .setColor(0x636369)
+    .setThumbnail(client.user.avatarURL)
+    .setAuthor(message.author.username)
+    .setFooter('Brought to you by Loop Bot © Galgotias', client.user.avatarURL)
+    .setTimestamp(new Date())
+    .setDescription("PREFIX : "+PREFIX)
+    .addField('eval','Evaluate command',true)
+    .addField('sys','Shows system information',true)
+    .addField('translate','Google Translate (Syntax : `translate toLangCode textToTranslate`)',true)
+    .addField('define','Urban Dictionary api (Syntax : `define word`)',true)
+    .addField('cconvert','Currency Converter (Syntax : `cconvert fromCurrencyCode toCurrencyCode Quantity`)',true)
+    .addField('currency','Crypto Currency Details (Syntax : `currency CryptoCurrencyCode`)',true)
+    .addField('country','Shows Country Details (Syntax : `country CountryNameOrCode`)',true)
+    .addField('servers','List of Servers the Bot Operates on',true)
+    .addField('profile','Shows Profile of tagged member')
+    message.channel.send(embed);
 }
 
 client.on('message', async function (message) {
@@ -399,9 +421,16 @@ client.on('message', async function (message) {
             message.channel.send('pong');
         }
         //eval
-        else if (message.content.startsWith(PREFIX+'eval') && (roles.includes(dev_id))) {
-            message.react('👍');
-            await geval(message);
+        else if (message.content.startsWith(PREFIX+'eval')) {
+            if(roles.includes(dev_id))
+            {
+                message.react('👍');
+                await geval(message);
+            }
+            else
+            {
+                message.channel.send(`ERROR : ${message.author.username} does not have permission to use this command`, {code : "x1"});
+            }
         }
         //system info
         else if (message.content.toLowerCase().trim() == PREFIX+'sys' && (roles.includes(dev_id)||roles.includes(support_id))) {
@@ -447,7 +476,13 @@ client.on('message', async function (message) {
         else if (message.content.toLowerCase().startsWith(PREFIX+'profile')) {
             message.react('👍');
             await gprofile(message);
-		}
+        }
+        //help
+        else if(message.content.toLowerCase()==PREFIX+'help')
+        {
+            message.react('👍');
+            await ghelp(message);
+        }
     }
     catch (err) {
         console.log(err);
