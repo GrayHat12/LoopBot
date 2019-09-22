@@ -712,4 +712,4 @@ client.on('message', async function (message) {
     }
 });
 
-client.login(auth.TOKEN);
+client.login(process.env.TOKEN);
