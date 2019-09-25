@@ -3,6 +3,10 @@ const os = require('os');
 const querystring = require('querystring');
 const request = require('request');
 const unirest = require('unirest');
+const News=require('./news.js');
+const UserHandler=require('./userHandling.js');
+const Weather=require('./weather.js');
+
 
 //const auth = require('./config.json');
 const acronyms = require('./country.json');
@@ -680,6 +684,21 @@ client.on('message', async function (message) {
             message.react('👍');
             await getMemesGaming(message);
         }
+        else if(message.content.toLowerCase().indexOf(PREFIX+'news')>=0)
+        {
+            News.PostArticle(message,undefined);
+
+        }
+        else if(message.content.toLowerCase().indexOf(PREFIX+'weather')>=0)
+        {
+            Weather.GetWeatherInfo(message);
+
+        }
+        else if(message.content.toLowerCase().indexOf(PREFIX+'warn')>=0)
+        {
+            UserHandler.Warn(message);
+        }
+
         else if (message.content.toLowerCase().startsWith(PREFIX + "compile")) {
             if (Date.now() < lastRun + 5000) {
                 message.react('👎');
